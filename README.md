@@ -21,7 +21,7 @@ El equipo desarrollo distintas versiones para abordar cada una de las secciones 
 
 Siendo el resultado final de esta labor colaborativa este repositorio de GitHub el cual contiene el código Proyecto_EQ7_V1.0R logrando los hallazgos detallados en el siguiente video:
 
--
+- https://www.youtube.com/watch?v=F-l4IEoKq9Q
 
 Adicionalmente compartimos también la carpeta de Drive en donde se encuentran todos nuestros preworks de R en el siguiente enlace:
 
