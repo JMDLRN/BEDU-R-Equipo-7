@@ -1,6 +1,6 @@
-#BEDU | Data Science | Fase 2 | Equipo 7
+# BEDU | Data Science | Fase 2 | Equipo 7
 
-#Equipo 7
+# Equipo 7
 
 - José Ezequiel Contreras Hernández
 
@@ -15,7 +15,7 @@
 - Carlos Alberto Vaquera Araujo
 
 
-#Metodología colaborativa
+# Metodología colaborativa
 
 El equipo desarrollo distintas versiones para abordar cada una de las secciones del proyecto.
 
