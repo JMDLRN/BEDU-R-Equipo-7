@@ -1,12 +1,19 @@
 #BEDU | Data Science | Fase 2 | Equipo 7
 
 #Equipo 7
+
 -José Ezequiel Contreras Hernández
+
 -Bertha Alicia Domínguez Díaz
+
 -Sergio Legorreta
+
 -José Manuel De la Rosa Nava
+
 -Andrea Kern
+
 -Carlos Alberto Vaquera Araujo
+
 
 #Metodología colaborativa
 
