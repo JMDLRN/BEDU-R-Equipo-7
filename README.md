@@ -25,7 +25,7 @@ Siendo el resultado final de esta labor colaborativa este repositorio de GitHub 
 
 Adicionalmente compartimos también la carpeta de Drive en donde se encuentran todos nuestros preworks de R en el siguiente enlace:
 
--
+- https://drive.google.com/drive/folders/1L1WpsJXJNtfMMbmvLVhj2wKmHVIM4rzf?usp=sharing
 
 ----
 Equipo 7
