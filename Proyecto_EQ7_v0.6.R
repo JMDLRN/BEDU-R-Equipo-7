@@ -43,7 +43,6 @@
 #Cargamos librerías
 library(dplyr)
 library(ggplot2)
-library(rstudioapi)
 
 #Cargamos dataset csv
 df.ini<-read.csv("https://raw.githubusercontent.com/beduExpert/Programacion-R-Santander-2022/main/Sesion-08/Postwork/inseguridad_alimentaria_bedu.csv")
@@ -65,6 +64,8 @@ df$refin <- factor(df$refin, labels = c("No", "Si"))
 df$IA <- factor(df$IA, labels = c("No", "Si"))
 df$numpeho<-as.numeric(df$numpeho)
 df$nse5f <- as.numeric(df$nse5f)
+
+
 
 # #Excluimos los NA de alimentos saludables y no saludables
 df.clean <- df[complete.cases(df),]
@@ -197,13 +198,13 @@ Ia.Si.Ga<- filter(Ia.Ga.clean, IA=="Si")#gasto - Inseguridad alimenticia
 
 par(mfrow = c(2, 2)) #El siguiente bloque de histogramas se pueden colocar en el orden especificado
 
-Seguridad.ga.sal <-hist(Ia.No.Ga$ln_als,  breaks="Sturges", main="Gasto saludable con seguridad")
+Seguridad.ga.sal <-hist(Ia.No.Ga$ln_als,  breaks="Sturges", main="Gasto saludable con seguridad alim")
 
-Seguridad.gas.nsal<-hist(Ia.No.Ga$ln_alns,  breaks="Sturges", main="Gasto no saludable con seguridad")
+Seguridad.gas.nsal<-hist(Ia.No.Ga$ln_alns,  breaks="Sturges", main="Gasto no saludable con seguridad alim")
 
-NSeguridad.ga.sal <-hist(Ia.Si.Ga$ln_als,  breaks="Sturges", main="Gasto saludable con inseguridad")
+NSeguridad.ga.sal <-hist(Ia.Si.Ga$ln_als,  breaks="Sturges", main="Gasto saludable con inseguridad alim")
 
-NSeguridad.gas.nsal<-hist(Ia.Si.Ga$ln_alns,  breaks="Sturges", main="Gasto no saludable con inseguridad")
+NSeguridad.gas.nsal<-hist(Ia.Si.Ga$ln_alns,  breaks="Sturges", main="Gasto no saludable con inseguridad alim")
 
 par(mfrow = c(1, 1))
 
@@ -285,6 +286,7 @@ skewness(df.clean[df.clean$IA=="Si", "ln_als"])
 #Esta distribución posee sesgo a la izquierda
 #Curtosis
 kurtosis(df.clean[df.clean$IA=="Si", "ln_als"])
+
 #Esta distribución es leptocúrtica.
 
 #El sesgo se puede eliminar truncando las colas.
@@ -353,33 +355,40 @@ kurtosis(df.clean[df.clean$IA=="No", "ln_alns"])
 
 ##Probabilidad IA como función de Nivel socioeconómico del hogar
 
-
+library(formattable)
 #Probabilidad de tener IA en el Nivel Bajo
-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==1, "nse5f"])/length(df.clean[df.clean$nse5f==1, "nse5f"])
+P<- length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==1, "nse5f"])/length(df.clean[df.clean$nse5f==1, "nse5f"])
+paste("La probabilidad de tener IA en Nivel Bajo es de", print(percent(P)))
 #Probabilidad de tener IA en el Nivel Medio Bajo
-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==2, "nse5f"])/length(df.clean[df.clean$nse5f==2, "nse5f"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==2, "nse5f"])/length(df.clean[df.clean$nse5f==2, "nse5f"])
+paste("La probabilidad de tener IA en Nivel Medio Bajo es de", print(percent(P)))
 #Probabilidad de tener IA en el Nivel Medio
-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==3, "nse5f"])/length(df.clean[df.clean$nse5f==3, "nse5f"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==3, "nse5f"])/length(df.clean[df.clean$nse5f==3, "nse5f"])
+paste("La probabilidad de tener IA en Nivel Medio es de", print(percent(P)))
 #Probabilidad de tener IA en el Nivel Medio Alto
-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==4, "nse5f"])/length(df.clean[df.clean$nse5f==4, "nse5f"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==4, "nse5f"])/length(df.clean[df.clean$nse5f==4, "nse5f"])
+paste("La probabilidad de tener IA en Nivel Medio Alto es de", print(percent(P)))
 #Probabilidad de tener IA en el Nivel Alto
-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==5, "nse5f"])/length(df.clean[df.clean$nse5f==5, "nse5f"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$nse5f==5, "nse5f"])/length(df.clean[df.clean$nse5f==5, "nse5f"])
+paste("La probabilidad de tener IA en Nivel Alto es de", print(percent(P)))
 
 ##Probabilidad IA como función de la Zona Geográfica
 
 #Probabilidad de tener IA en el ámbito urbano
-length(df.clean[df.clean$IA=="Si" & df.clean$area=="Urbana", "area"])/length(df.clean[df.clean$area=="Urbana", "area"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$area=="Urbana", "area"])/length(df.clean[df.clean$area=="Urbana", "area"])
+paste("La probabilidad de tener IA en ámbito urbano es de", print(percent(P)))
 #Probabilidad de tener IA en el ámbito rural
-length(df.clean[df.clean$IA=="Si" & df.clean$area=="Rural", "area"])/length(df.clean[df.clean$area=="Rural", "area"])
-
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$area=="Rural", "area"])/length(df.clean[df.clean$area=="Rural", "area"])
+paste("La probabilidad de tener IA en ámbito rural es de", print(percent(P)))
 
 ##Probabilidad IA como función de los recursos financieros
 
 #Probabilidad de tener IA con recursos financieros adicionales
-length(df.clean[df.clean$IA=="Si" & df.clean$refin=="Si", "refin"])/length(df.clean[df.clean$refin=="Si", "refin"])
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$refin=="Si", "refin"])/length(df.clean[df.clean$refin=="Si", "refin"])
+paste("La probabilidad de tener IA con recursos financieros adicionales es de", print(percent(P)))
 #Probabilidad de tener IA sin recursos financieros adicionales
-length(df.clean[df.clean$IA=="Si" & df.clean$refin=="No", "refin"])/length(df.clean[df.clean$refin=="No", "refin"])
-
+P<-length(df.clean[df.clean$IA=="Si" & df.clean$refin=="No", "refin"])/length(df.clean[df.clean$refin=="No", "refin"])
+paste("La probabilidad de tener IA sin recursos financieros adicionales es de", print(percent(P)))
 
 
 
@@ -408,7 +417,72 @@ t.test(x = trim(df.clean[df.clean$IA=="No", "ln_als"],p=0.2,tails="both"),
 #efectivamente la población sin IA gasta más en 
 #promedio en Alimentos Saludables que la población con IA 
 
+#A continuación, probaremos la Hipótesis de que la población sin IA gasta menos en 
+#promedio que la que presenta IA en Alimentos No Saludables.
 
+#Planteamiento de hipótesis:
+#Ho: prom_IANo_alns >= prom_IASi_alns 
+#Ha: prom_IANo_alns < prom_IASi_alns"
+
+#En primer lugar hacermos la comparación de varianzas de ambas distribuciones,
+#Donde en ambos casos hemos truncado las colas para aleviar el sesgo
+var.test(trim(df.clean[df.clean$IA=="No", "ln_alns"],p=0.2,tails="both"), 
+         trim(df.clean[df.clean$IA=="Si", "ln_alns"],p=0.2,tails="both"),
+         ratio = 1, alternative = 'two.sided')
+#El resultado indica que a 99% de confianza las varianzas son diferentes
+
+t.test(x = trim(df.clean[df.clean$IA=="No", "ln_alns"],p=0.2,tails="both"), 
+       y =trim(df.clean[df.clean$IA=="Si", "ln_alns"],p=0.2,tails="both"),
+       alternative = "less",
+       mu = 0, var.equal = FALSE)
+#El resultado indica que a 99% de confianza no se desecha la hipótesis nula, 
+#sugiriendo que en realidad la población sin IA gasta más en 
+#promedio en Alimentos No Saludables que la población con IA. 
+
+
+#Como tercera hipótesis, asumirermos de que la población sin IA gasta más 
+# en Alimentos Saludables en promedio que en Alimentos No Saludables.
+
+#Planteamiento de hipótesis:
+#Ho: prom_IANo_als <= prom_IANo_alns 
+#Ha: prom_IANo_als > prom_IANo_alns"
+
+#En primer lugar hacermos la comparación de varianzas de ambas distribuciones,
+#Donde en ambos casos hemos truncado las colas para aleviar el sesgo
+var.test(trim(df.clean[df.clean$IA=="No", "ln_als"],p=0.2,tails="both"), 
+         trim(df.clean[df.clean$IA=="No", "ln_alns"],p=0.2,tails="both"),
+         ratio = 1, alternative = 'two.sided')
+#El resultado indica que a 99% de confianza las varianzas son diferentes
+
+t.test(x = trim(df.clean[df.clean$IA=="No", "ln_als"],p=0.2,tails="both"), 
+       y =trim(df.clean[df.clean$IA=="No", "ln_alns"],p=0.2,tails="both"),
+       alternative = "greater",
+       mu = 0, var.equal = FALSE)
+#El resultado indica que a 99% de confianza se desecha la hipótesis nula, 
+#sugiriendo que efectivamente la población sin IA gasta más en 
+#promedio en Alimentos Saludables que en No Saludables. 
+
+#Concluimos este análisis con la hipótesis de que la población con IA gasta más 
+# en Alimentos No Saludables en promedio que en Alimentos Saludables.
+
+#Planteamiento de hipótesis:
+#Ho: prom_IASi_als >= prom_IASi_alns 
+#Ha: prom_IASi_als < prom_IASi_alns"
+
+#En primer lugar hacermos la comparación de varianzas de ambas distribuciones,
+#Donde en ambos casos hemos truncado las colas para aleviar el sesgo
+var.test(trim(df.clean[df.clean$IA=="Si", "ln_als"],p=0.2,tails="both"), 
+         trim(df.clean[df.clean$IA=="Si", "ln_alns"],p=0.2,tails="both"),
+         ratio = 1, alternative = 'two.sided')
+#El resultado indica que a 99% de confianza las varianzas son diferentes
+
+t.test(x = trim(df.clean[df.clean$IA=="Si", "ln_als"],p=0.2,tails="both"), 
+       y =trim(df.clean[df.clean$IA=="Si", "ln_alns"],p=0.2,tails="both"),
+       alternative = "less",
+       mu = 0, var.equal = FALSE)
+#El resultado indica que a 99% de confianza no se desecha la hipótesis nula, 
+#de modo que en realidad la población con IA también gasta más o igual en 
+#promedio en Alimentos Saludables que en No Saludables. 
 
 
 "5 Estima un modelo de regresión, lineal o logístico, para identificar los
@@ -417,12 +491,27 @@ determinantes de la inseguridad alimentaria en México"
 #Modelo de Regresión logística para identificar las determinantes de la Inseguridad
 #alimentaria en México.
 
+#Matriz de correlacion
+round(cor(select(df.clean, nse5f,añosedu,numpeho, ln_als, ln_alns)),4) 
+
+#Construimos una regresión lineal con 
 attach(df.clean)
-logistic.1 <- glm(IA ~ nse5f + area + numpeho + refin  + ln_als + ln_alns 
+logistic.1 <- glm(IA ~ nse5f + area + numpeho + refin + añosedu + ln_als + ln_alns 
                   + nse5f:area + nse5f:numpeho + nse5f:refin 
                   + area:numpeho + area:refin + numpeho:refin, family = binomial)
 
 summary(logistic.1)
+
+#x<-nse5f + area + numpeho + refin + añosedu + ln_als + ln_alns 
+#+ nse5f:area + nse5f:numpeho + nse5f:refin 
+#+ area:numpeho + area:refin + numpeho:refin
+
+plot(IA ~ nse5f + area + numpeho + refin + añosedu + ln_als + ln_alns 
+     + nse5f:area + nse5f:numpeho + nse5f:refin 
+     + area:numpeho + area:refin + numpeho:refin, data=df.clean, xlim = c(0,10))
+
+#curve(predict(logistic.1, newdata = data.frame(x), type = "response"),
+#      add = TRUE)
 
 
 #Del análisis anterior, se puede concluir que a un nivel de confianza de 99%, los
@@ -434,30 +523,26 @@ logistic.2 <- update(logistic.1, ~. - area - refin - nse5f:numpeho
                      - nse5f:refin - area:numpeho - area:refin - numpeho:refin)
 summary(logistic.2)
 
+
 #En este modelo simplificado, también a nivel de confianza de 99% el coeficiente 
-#de la interacción remanente es consistente con cero, de modo que podemos simplificar 
+#de la interacción remanente es consistente con cero, al igual que el coeficiente 
+#de ln_als de modo que podemos simplificar 
 #una segunda ocasión para obtener el modelo definitivo
 
-logistic.3 <- update(logistic.2, ~. - nse5f:area)
+logistic.3 <- update(logistic.2, ~. - nse5f:area - ln_als)
 summary(logistic.3)
 
 pseudo_r2.3 <- (logistic.3$null.deviance - logistic.3$deviance)/logistic.3$null.deviance
 pseudo_r2.3
 
+#En base a este estudio, los determinantes socioeconómicos de la inseguridad alimentaria
+#en México estan principalmente relacionados con el nivel socioeconómico, el número de
+#integrantes de la familia, el nivel educativo y el gasto en alimentos no saludables. 
+#Sin embargo el valor del pseudo R^2 es muy bajo, indicando que la calidad del modelo  
+#es baja también. 
+
+
+
 "6 Escribe tu análisis en un archivo README.MD y tu código en un script de R y
 publica ambos en un repositorio de Github."
 
-#Commit inicial
-myTerm <- terminalCreate(caption = "GIT", shellType = "win-git-bash")
-terminalSend(myTerm, "git config --global user.name 'JMDLRN'\n")
-terminalSend(myTerm, "git config --global user.email 'manuel.delarosa.nava@bsci.com'\n")
-terminalSend(myTerm, "git status\n")
-terminalSend(myTerm, "git add README.md\n")
-terminalSend(myTerm, "git add Proyecto_EQ7.R\n")
-terminalSend(myTerm, "git commit -m 'Commit de prueba 2'\n")
-terminalSend(myTerm, "git branch -M main\n")
-terminalSend(myTerm, "git remote add origin https://github.com/JMDLRN/BEDU-R-Equipo-7.git\n")
-terminalSend(myTerm, "git push -u origin main\n")
-
-#Cambios desde Github
-terminalSend(myTerm, "git pull origin main\n")
