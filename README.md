@@ -2,17 +2,17 @@
 
 #Equipo 7
 
--José Ezequiel Contreras Hernández
+- José Ezequiel Contreras Hernández
 
--Bertha Alicia Domínguez Díaz
+- Bertha Alicia Domínguez Díaz
 
--Sergio Legorreta
+- Sergio Legorreta
 
--José Manuel De la Rosa Nava
+- José Manuel De la Rosa Nava
 
--Andrea Kern
+- Andrea Kern
 
--Carlos Alberto Vaquera Araujo
+- Carlos Alberto Vaquera Araujo
 
 
 #Metodología colaborativa
